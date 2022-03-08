@@ -2,8 +2,8 @@
 Contains and displays the SQL queries, data dictionary, and visualizations used for analyzing a dataset regarding film rentals for a mock company, Rockbuster Stealth LLC. The dataset includes 1,000 films from 2006, which are all in English. 
 
 # Objective
-Instacart
-Instacart is an online grocery stroe that operates through an app. Instacart already has very good sales, but they want to uncover more information about their sales patterns. The objective of this study is to analyze customer behavior and uncover patterns for growth. 
+Rockbuster 
+Rockbuster Stealth LLC is a movie rental company. The Rockbuster Stealth management team is planning to launch an online video rental service in order to stay competitive. The objective of this study is to load all of Rockbuster’s data into a relational database management system (RDBMS) and use SQL to analyze the data.
 
 # Data
 The dataset analyzed contains the following variables: 
