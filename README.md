@@ -25,9 +25,9 @@ The dataset analyzed contains the following parameters:
 The data can be found [here](xxx) 
 
 # Tools
-PostgreSQL - used to store the data
-pgAdmin4 - used to analyze the data
-Tableau - used to create visualizations 
+1. PostgreSQL - used to store the data
+2. pgAdmin4 - used to analyze the data
+3. Tableau - used to create visualizations 
 
 # Data Dictionary
 (Link to Rockbuster Data Dictionary) 
