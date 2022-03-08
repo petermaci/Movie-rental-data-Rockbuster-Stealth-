@@ -33,4 +33,4 @@ The data can be found [here](xxx)
 Data dictionary regarding the movie rental analysis can be found [here](https://github.com/petermaci/Movie-rental-data-Rockbuster-Stealth-/blob/main/Rockbuster%20Data%20Dictionary.pdf)
 
 # Visualization
-(Link to Tableau) 
+Final presentation discussing a business plan to address the results of the analysis and customer behavior can be found [here](https://github.com/petermaci/Movie-rental-data-Rockbuster-Stealth-/blob/main/Rockbuster%20Stealth%20Presentation.pdf) 
