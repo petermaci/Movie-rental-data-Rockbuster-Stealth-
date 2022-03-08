@@ -1,0 +1,68 @@
+----//Top 10 countries in terms of customer count//--
+SELECT d.country, 
+COUNT (customer_id) AS customer_count
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER join city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+GROUP BY country
+ORDER BY customer_count DESC 
+
+
+
+
+
+---///TOP 10 cities within TOP 10 countries---/// 
+
+SELECT c.city AS top_10_cities,
+COUNT (customer_id) AS customer_count
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER join city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+WHERE D.country IN ('India', 'China', 'United States', 
+					'Japan', 'Mexico','Brazil', 'Russian Federation', 
+					'Philippines', 'Turkey', 'Indonesia')
+GROUP BY c.city
+ORDER BY customer_count DESC 
+LIMIT 10
+
+
+
+---///--TOP 5 customers in the TOP 10 cities who paid the highest totals at Rockbuster--///---
+SELECT A.customer_id, B.first_name, B.last_name, D.city, 
+SUM (amount) AS total_paid
+FROM payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_id = D.city_id
+INNER JOIN country E ON D.country_id = E.country_id
+WHERE E.country IN ('India', 'China', 'United States', 
+					'Japan', 'Mexico', 'Brazil', 'Russian Federation',
+					'Philippines', 'Turkey', 'Indonesia') 
+AND D.city IN ('Aurora', 'Tokat', 'Tarsus', 'Atlixco',
+				'Emeishan','Pontianak', 'Shimoga', 'Aparecida de Goinia', 
+				'Zalantun', 'Taguig')
+GROUP BY A.customer_id, B.first_name, B.last_name, D.city
+ORDER BY total_paid DESC
+LIMIT 5;
+
+---Step 3 revised---
+
+SELECT A.customer_id,
+		A.first_name,
+		A.last_name,
+ 		C.city,
+ 		D.country,
+SUM (E.amount) AS total_paid
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+ INNER JOIN city C on B.city_id = C.city_id
+ INNER JOIN country D on C.country_id = D.country_id
+ INNER JOIN payment E on A.customer_id = E.customer_id 
+WHERE city IN ('Aurora', 'Atlixco', 'Xintai', 'Adoni',
+				'Dhule (Dhulia)','Kurashiki', 'Pingxiang', 'Sivas', 
+				'Celaya', 'So Leopoldo')
+GROUP BY A.customer_id, A.first_name, A.last_name, C.city, D.country
+ORDER BY total_paid DESC
+LIMIT 5
