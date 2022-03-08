@@ -6,22 +6,23 @@ Rockbuster
 Rockbuster Stealth LLC is a movie rental company. The Rockbuster Stealth management team is planning to launch an online video rental service in order to stay competitive. The objective of this study is to load all of Rockbuster’s data into a relational database management system (RDBMS) and use SQL to analyze the data.
 
 # Data
-The dataset analyzed contains the following variables: 
-1. actor
-2. film
-3. film_actor
-4. category
-5. store
-6. inventory
-7. rental
-8. payment
-9. staff
-10. customer
-11. address
-12. city
-13. country
+The dataset analyzed contains the following parameters: 
+1. actor - unique number assigned to an actor
+2. film - unique number assigned to a film
+3. film_actor - unique number assined to an actor 
+4. category - unique number assigned to a film category/genre
+5. store - unique number assigned to a store
+6. inventory - unique number assigned to inventory 
+7. rental - unique ID number assigned to rental
+8. payment - unique ID number assigned to payment method
+9. staff - unique ID number assigned to employee
+10. customer - unique ID number assigned to customer
+11. address - unique number assigned to a store address
+12. city - unique number assigned to a city
+13. country - unique number assigned to a country 
+14. amount - amount paid
 
-The data 
+The data can be found [here](xxx) 
 
 # Tools
 PostgreSQL - used to store the data
