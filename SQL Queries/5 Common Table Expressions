@@ -1,0 +1,92 @@
+--Exercise 3.9----Creating a CTE (Commong Table Expression)----///
+WITH category_name_cte (film_id, rating, category_name) AS 
+(SELECT A.film_id,
+       A.rating,
+       C.name
+FROM film A
+LEFT JOIN film_category B ON A.film_id = B.film_id
+LEFT JOIN category C ON B.category_id = C.category_id)
+SELECT rating, category_name, COUNT(film_id) AS cnts
+FROM category_name_cte
+GROUP BY 1, 2 
+ORDER BY rating, cnts DESC
+
+
+---//Creating Subquery similar to CTE above--///
+SELECT rating,
+       name AS category_name,
+       COUNT(film_id) AS cnts
+FROM
+  (SELECT A.film_id,
+          A.rating,
+          C.name
+   FROM film A
+   LEFT JOIN film_category B ON A.film_id = B.film_id
+   LEFT JOIN category C ON B.category_id = C.category_id) AS category_name_sub
+GROUP BY 1,
+         2
+ORDER BY rating,
+         cnts DESC
+		 
+		 
+		 
+---Task 3.9 CTE----
+--//Converting subqueries from Task 3.8 into CTEs---//
+--//Step 1---///
+EXPLAIN 
+WITH avg_paid (customer_id, first_name, last_name, city, country) AS
+(SELECT A.customer_id, B.first_name, B.last_name, D.city, E.country,
+SUM (amount) AS total_paid
+FROM payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_id=D.city_id 
+INNER JOIN country E ON D.country_id = E.country_id
+WHERE E.country IN ('India', 'China', 'United States', 
+					'Japan', 'Mexico', 'Brazil', 'Russian Federation',
+					'Philippines', 'Turkey', 'Indonesia') 
+AND D. city IN ('Aurora', 'Atlixco', 'Xintai', 'Adoni',
+				'Dhule (Dhulia)','Kurashiki', 'Pingxiang', 'Sivas', 
+				'Celaya', 'So Leopoldo')
+GROUP BY A.customer_id, B.first_name, B.last_name, D.city, E.country
+ORDER BY SUM(amount) DESC 
+LIMIT 5) 
+SELECT ROUND (AVG(total_paid)) AS average_amount_paid
+FROM avg_paid;
+
+
+---/Step 1 continued - creating a CTE for Step 2 from Task 3.8--// 
+EXPLAIN
+WITH top_5_cte (country, customer_id) AS (
+SELECT country.country,
+	COUNT(DISTINCT customer.customer_id) AS all_customer_count,
+	COUNT(DISTINCT country.country) AS top_customers_count
+FROM (SELECT A.customer_id, B.first_name, B.last_name, D.city, E.country,
+SUM (amount) AS total_paid
+FROM payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_id=D.city_id 
+INNER JOIN country E ON D.country_id = E.country_id
+WHERE E.country IN ('India', 'China', 'United States', 
+					'Japan', 'Mexico', 'Brazil', 'Russian Federation',
+					'Philippines', 'Turkey', 'Indonesia') 
+AND D. city IN ('Aurora', 'Atlixco', 'Xintai', 'Adoni',
+				'Dhule (Dhulia)','Kurashiki', 'Pingxiang', 'Sivas', 
+				'Celaya', 'So Leopoldo')
+GROUP BY A.customer_id, B.first_name, B.last_name, D.city, E.country
+ORDER BY total_paid DESC
+LIMIT 5) AS top_5_customers
+LEFT JOIN customer ON customer.customer_id = customer.customer_id
+LEFT JOIN address ON customer.address_id = address.address_id
+LEFT JOIN city ON address.city_id = city.city_id 
+LEFT JOIN country ON city.country_id = country.country_id
+GROUP BY country.country
+ORDER BY COUNT(country.country) DESC 
+LIMIT 5)
+SELECT country, customer_id
+FROM top_5_cte;
+--///-
+		 
+		 
+		 

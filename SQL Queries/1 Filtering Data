@@ -1,0 +1,53 @@
+--Filtering Data--
+
+--Showing films that meet conditions where title includes Uptown--
+
+SELECT film_id, title, description
+FROM film
+WHERE title LIKE '%Uptown%' 
+
+
+--Films with lengths more than 120mins and rental rate more than 2.99
+SELECT film_id, title, description, LENGTH, rental_rate
+FROM film
+WHERE LENGTH >120 AND rental_rate > 2.99
+
+--Films where rental duration is between 3 and 7 days
+SELECT film_id, title, description, rental_duration
+FROM film
+WHERE rental_duration BETWEEN '3' AND '7'
+
+
+---Films where replacement cost is less than 14.99
+SELECT film_id, title, description, replacement_cost
+FROM film
+WHERE replacement_cost < 14.99 
+
+
+---Films with rating PG or G---
+SELECT film_id, title, description, rating
+FROM film
+WHERE rating = 'PG' OR rating = 'G'
+
+
+--Films with rating PG or G, including count of movies, avg rental rate, and maximum/minimum rental duration--
+SELECT COUNT (film_id),
+AVG (rental_duration),
+MIN (rental_duration),
+MAX (rental_duration)
+FROM film
+WHERE rating IN ('PG', 'G')
+
+
+--Grouping the above results based on G and PG ratings---
+SELECT rating, COUNT (film_id) AS count_of_movies,
+AVG (rental_duration) AS average_movie_rental_rate,
+MIN (rental_duration) AS minimum_rental_duration,
+MAX (rental_duration) AS maximum_rental_duration
+FROM film
+WHERE rating IN ('PG', 'G')
+GROUP BY rating
+
+
+
+
