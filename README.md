@@ -30,7 +30,7 @@ The data can be found [here](xxx)
 3. Tableau - used to create visualizations 
 
 # Data Dictionary
-(Link to Rockbuster Data Dictionary) 
+Data dictionary regarding the movie rental analysis can be found [here](https://github.com/petermaci/Movie-rental-data-Rockbuster-Stealth-/blob/main/Rockbuster%20Data%20Dictionary.pdf)
 
 # Visualization
 (Link to Tableau) 
